@@ -13,6 +13,9 @@ func main(){
     
     ip, network, _ = net.ParseCIDR("192.168.1.10/24");
     fmt.Println(ip.String())
-    fmt.Println(network.IP.String())
-    fmt.Println(network.Mask.String())
+    fmt.Println(network.String())
+    network.IP = ip
+    fmt.Println(network.String())
+//    fmt.Println(network.IP.String())
+ //   fmt.Println(network.Mask.String())
 }

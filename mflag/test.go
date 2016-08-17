@@ -1,3 +1,4 @@
+//ref: https://lawlessguy.wordpress.com/2013/07/23/filling-a-slice-using-command-line-flags-in-go-golang/
 package main
  
 import (
