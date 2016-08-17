@@ -15,8 +15,8 @@ func CheckError(err error) {
 }
  
 func main() {
-    /* Lets prepare a address at any address at port 36000*/   
-    ServerAddr,err := net.ResolveUDPAddr("udp",":36000")
+    /* Lets prepare a address at any address at port 40000*/   
+    ServerAddr,err := net.ResolveUDPAddr("udp",":40000")
     CheckError(err)
  
     /* Now listen at selected port */
@@ -24,7 +24,7 @@ func main() {
     CheckError(err)
     defer ServerConn.Close()
  
-    buf := make([]byte, 1024)
+    buf := make([]byte, 4096)
  
     for {
         n,addr,err := ServerConn.ReadFromUDP(buf)
