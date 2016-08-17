@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-type Object interface {}
+type Object interface{}
 
 type Inner struct {
 	Age int `json:"age"`
@@ -16,6 +16,7 @@ type ColorGroup struct {
 	Name   string   `json:"name"`
 	Colors []string `json:"colors"`
 	Valid  bool     `json:"valid"`
+	ch     chan struct{}
 	Object
 }
 
@@ -25,6 +26,7 @@ func main() {
 		Name:   "Reds",
 		Colors: []string{"Crimson", "Red", "Ruby", "Maroon"},
 		Valid:  true,
+		ch:     make(chan struct{}),
 		Object: &Inner{
 			Age: 11,
 		},
@@ -35,4 +37,3 @@ func main() {
 
 //output:
 //{"id":1,"name":"Reds","colors":["Crimson","Red","Ruby","Maroon"],"valid":true,"Inner":{"age":11}}
-
