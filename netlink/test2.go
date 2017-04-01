@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	parent, err := netlink.LinkByName("eth1")
+	parent, err := netlink.LinkByName("eth10")
 	if err != nil {
 		fmt.Printf("Get host interface error: %v", err)
 		return
