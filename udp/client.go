@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"net"
+	"time"
 )
 
 var (
@@ -36,22 +37,28 @@ func main() {
 
 	defer Conn.Close()
 
-	buf := make([]byte, msgSize)
-	n, err := Conn.Write(buf)
-	if err != nil {
-		fmt.Println("write data error:", err)
-		return
-	} else {
-		fmt.Printf("write %d bytes\n", n)
-	}
-
+	//buf := make([]byte, msgSize)
+	i := 0
 	for {
+		s := fmt.Sprintf("test %d", i)
+		i += 1
+
+		buf := []byte(s)
+		n, err := Conn.Write(buf)
+		if err != nil {
+			fmt.Println("write data error:", err)
+			return
+		} else {
+			fmt.Printf("write %d bytes\n", n)
+		}
 		n, addr, err := Conn.ReadFromUDP(buf[0:n])
 		if err != nil {
 			fmt.Println("rcv error:", err)
 		} else {
-			//fmt.Println("received ",string(buf[0:n]), " from ",addr)
-			fmt.Println("received ", n, " bytes from ", addr)
+			fmt.Printf("received '%s' from %v\n", string(buf[0:n]), addr)
+			//fmt.Println("received ", n, " bytes from ", addr)
 		}
+
+		time.Sleep(time.Second)
 	}
 }
