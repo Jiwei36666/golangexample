@@ -10,6 +10,9 @@ import (
 )
 
 func main() {
+	//const jsonStream = `
+	//	{"Name": "Ed", "Text": "Knock knock.", "Valid": true, "Index": 5, "IPAMArgs": {"ip": "192.168.1.1"}}
+	//`
 	const jsonStream = `
 		{"Name": "Ed", "Text": "Knock knock.", "Valid": true, "IPAMArgs": {"ip": "192.168.1.1"}}
 	`
@@ -19,6 +22,7 @@ func main() {
 	type Message struct {
 		Name, Text string
 		Valid      bool      `json:"Valid"`
+        Index      *int      `json:"Index"`
 		Args       *IPAMArgs `json:"-"`
 	}
 
@@ -31,6 +35,9 @@ func main() {
 			log.Fatal(err)
 		}
 		fmt.Printf("%#v\n", m)
+        if m.Index != nil {
+		    fmt.Printf("%d\n", *m.Index)
+        }
 		//fmt.Printf("%s: %s\n", m.Name, m.Text)
 	}
 }
